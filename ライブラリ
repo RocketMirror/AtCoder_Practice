@@ -1,0 +1,96 @@
+公約数列挙
+def make_divisors(n):
+    lower_divisors , upper_divisors = [], []
+    i = 1
+    while i*i <= n:
+        if n % i == 0:
+            lower_divisors.append(i)
+            if i != n // i:
+                upper_divisors.append(n//i)
+        i += 1
+    return lower_divisors + upper_divisors[::-1]
+
+二つの自然数の公約数列挙
+def cf(x1,x2):
+    cf=[]
+    for i in range(2,min(x1,x2)+1):
+        if x1 % i == 0 and x2 % i == 0:
+            cf.append(i)
+    return cf
+
+最大公約数（複数の最大公約数）
+from functools import reduce
+import math
+def mygcd(*diffs):
+    return reduce(math.gcd, diffs)
+
+二つのリスト内の互いに素でないものの個数
+import math
+def so(a, b):
+    count= 0
+    len_a= len(a)
+    len_b= len(b)
+    for i in range(len_a):
+        for j in range(len_b):
+            x= a[i]
+            y= b[j]
+            if(math.gcd(x,y) != 1):
+                count += 1
+    return count
+
+最小公倍数
+import math
+def lcm(a,b):
+    n = math.gcd(a,b)
+    return a * b // n
+
+複数の最小公倍数
+import math
+def my_lcm_base(x, y):
+    return (x * y) // math.gcd(x, y)
+def my_lcm(*numbers):
+    return reduce(my_lcm_base, numbers, 1)
+
+ユークリッドの互除法
+def gcd(x, y):
+    if y == 0:
+        return x
+    else:
+        return gcd(y,x%y)
+
+二重リスト解除
+ll = [flatten for inner in l for flatten in inner]
+
+エラトステネスの篩
+def eratos (n):
+    num = set()
+    prime = []
+    for i in range (2, n + 1):
+        if i not in num:
+            prime.append (i)
+        for j in range (i * i, n + 1, i):
+            num.add (j)
+    return prime, len (prime)
+
+x**n 繰り返し二乗法
+def pow (x, n, mod):
+    ans = 1
+    while n > 0:
+        if n % 2 != 0:
+            ans *= x % mod
+        x = x * x % mod
+        n = n // 2
+    return ans
+    
+nCk　フェルマーの小定理
+def nck (n, k, mod):
+    p, q = 1, 1
+    for i in range (k):
+        p = p * (n - i) % mod
+        q = q * (i + 1) % mod
+    return p * pow(q, mod - 2, mod) % mod
+
+ゼロ埋め
+s_zero = s.zfill(桁数)
+s_zero = s.ljust(桁数, '0')
+s_zero = s.center(桁数, '0')
